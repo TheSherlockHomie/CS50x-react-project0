@@ -18,14 +18,25 @@ function newTodo() {
   const newCheckBox = document.createElement("input")
   newCheckBox.setAttribute("type", "checkbox")
   newCheckBox.className = "todo-checkbox"
-  //insert this in list
-  newItem.appendChild(newCheckBox)
-  //insert text in form
+  //make delete button
+  const delButton = document.createElement("button")
+  delButton.innerText = "X"
+  delButton.className = "button todo-delete"
+  delButton.addEventListener("click", delItem)
+  //insert text, checkbox and button in form
   const txt = document.createTextNode(inputText)
   const span = document.createElement("span")
   span.appendChild(newCheckBox)
   span.appendChild(txt)
+  span.appendChild(delButton)
   newItem.appendChild(span)
   //insert item in list
   list.appendChild(newItem)
+}
+
+function delItem(e) {
+  if(confirm("Are you sure?")) {
+    listItem = e.target.parentElement.parentElement;
+    list.removeChild(listItem)
+  }
 }
